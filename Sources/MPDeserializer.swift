@@ -133,12 +133,12 @@ extension MPDeserializer {
 
     mutating func readFloat() throws -> Float {
         let bytes = try readUInt32()
-        return unsafeBitCast(bytes, to: Float.self)
+        return Float(bitPattern: bytes)
     }
 
     mutating func readDouble() throws -> Double {
         let bytes = try readUInt64()
-        return unsafeBitCast(bytes, to: Double.self)
+        return Double(bitPattern: bytes)
     }
 
     mutating func readString(code: UInt8) throws -> String {
