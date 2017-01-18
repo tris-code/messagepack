@@ -41,7 +41,7 @@ You can find this code and more in [examples](https://github.com/tris-foundation
 
 ```swift
     let hey = MessagePack("hey there!")
-    let bytes = MessagePack.serialize(string)
+    let bytes = MessagePack.serialize(hey)
     let original = String(MessagePack.deserialize(bytes: bytes))
 ```
 
