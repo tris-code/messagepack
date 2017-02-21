@@ -8,14 +8,13 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-import XCTest
 import MessagePack
 
-class LiteralConvertibleTests: XCTestCase {
+class LiteralConvertibleTests: TestCase {
     func testNilLiteralConvertible() {
         let expected = MessagePack.nil
         let value: MessagePack = nil
-        XCTAssertEqual(value, expected)
+        assertEqual(value, expected)
     }
 
     func testBooleanLiteralConvertible() {
@@ -23,16 +22,16 @@ class LiteralConvertibleTests: XCTestCase {
         let falseExpected = MessagePack.bool(false)
         let trueValue: MessagePack = true
         let falseValue: MessagePack = false
-        XCTAssertEqual(trueValue, trueExpected)
-        XCTAssertEqual(falseValue, falseExpected)
+        assertEqual(trueValue, trueExpected)
+        assertEqual(falseValue, falseExpected)
     }
 
     func testIntegerLiteralConvertible() {
         let expected = MessagePack.int(123)
         let value: MessagePack = 123
-        XCTAssertEqual(value, expected)
+        assertEqual(value, expected)
         guard case .int = value else {
-            XCTFail("value is not .int type")
+            fail("value is not .int type")
             return
         }
     }
@@ -40,36 +39,34 @@ class LiteralConvertibleTests: XCTestCase {
     func testFloatLiteralConvertible() {
         let expected = MessagePack.double(1.618)
         let value: MessagePack = 1.618
-        XCTAssertEqual(value, expected)
+        assertEqual(value, expected)
     }
 
     func testStringLiteralConvertible() {
         let expected = MessagePack.string("Hello, World!")
         let value: MessagePack = "Hello, World!"
-        XCTAssertEqual(value, expected)
+        assertEqual(value, expected)
     }
 
     func testArrayLiteralConvertible() {
         let expected: MessagePack = [1, 2, 3]
         let value = MessagePack.array([.int(1), .int(2), .int(3)])
-        XCTAssertEqual(value, expected)
+        assertEqual(value, expected)
     }
 
     func testDictionaryLiteralConvertible() {
         let expected = MessagePack.map([.string("Hello"): .string("World")])
         let value: MessagePack = ["Hello": "World"]
-        XCTAssertEqual(value, expected)
+        assertEqual(value, expected)
     }
 
-    static var allTests : [(String, (LiteralConvertibleTests) -> () throws -> Void)] {
-        return [
-            ("testNilLiteralConvertible", testNilLiteralConvertible),
-            ("testBooleanLiteralConvertible", testBooleanLiteralConvertible),
-            ("testIntegerLiteralConvertible", testIntegerLiteralConvertible),
-            ("testFloatLiteralConvertible", testFloatLiteralConvertible),
-            ("testStringLiteralConvertible", testStringLiteralConvertible),
-            ("testArrayLiteralConvertible", testArrayLiteralConvertible),
-            ("testDictionaryLiteralConvertible", testDictionaryLiteralConvertible)
-        ]
-    }
+    static var allTests = [
+        ("testNilLiteralConvertible", testNilLiteralConvertible),
+        ("testBooleanLiteralConvertible", testBooleanLiteralConvertible),
+        ("testIntegerLiteralConvertible", testIntegerLiteralConvertible),
+        ("testFloatLiteralConvertible", testFloatLiteralConvertible),
+        ("testStringLiteralConvertible", testStringLiteralConvertible),
+        ("testArrayLiteralConvertible", testArrayLiteralConvertible),
+        ("testDictionaryLiteralConvertible", testDictionaryLiteralConvertible)
+    ]
 }

@@ -8,45 +8,42 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-import XCTest
 import MessagePack
 
-class InitTests: XCTestCase {
+class InitTests: TestCase {
     func testBytes() {
         let expected: MessagePack = [1,2,3]
         var decoder = Decoder(bytes: [0x93, 0x01, 0x02, 0x03])
         guard let decoded = try? decoder.decode() as MessagePack else {
-            XCTFail("decode error")
+            fail("decode error")
             return
         }
-        XCTAssertEqual(decoded, expected)
+        assertEqual(decoded, expected)
     }
 
     func testUnsafeBufferPointer() {
         let expected: MessagePack = [1,2,3]
         var decoder = Decoder(bytes: UnsafeBufferPointer(start: UnsafePointer([0x93, 0x01, 0x02, 0x03]), count: 4))
         guard let decoded = try? decoder.decode() as MessagePack else {
-            XCTFail("decode error")
+            fail("decode error")
             return
         }
-        XCTAssertEqual(decoded, expected)
+        assertEqual(decoded, expected)
     }
 
     func testUnsafePointer() {
         let expected: MessagePack = [1,2,3]
         var decoder = Decoder(bytes: UnsafePointer([0x93, 0x01, 0x02, 0x03]), count: 4)
         guard let decoded = try? decoder.decode() as MessagePack else {
-            XCTFail("decode error")
+            fail("decode error")
             return
         }
-        XCTAssertEqual(decoded, expected)
+        assertEqual(decoded, expected)
     }
 
-    static var allTests : [(String, (InitTests) -> () throws -> Void)] {
-        return [
-            ("testBytes", testBytes),
-            ("testUnsafeBufferPointer", testUnsafeBufferPointer),
-            ("testUnsafePointer", testUnsafePointer)
-        ]
-    }
+    static var allTests = [
+        ("testBytes", testBytes),
+        ("testUnsafeBufferPointer", testUnsafeBufferPointer),
+        ("testUnsafePointer", testUnsafePointer)
+    ]
 }

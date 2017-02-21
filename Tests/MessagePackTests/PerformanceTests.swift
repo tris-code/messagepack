@@ -8,12 +8,11 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-import XCTest
 import MessagePack
 
-class PerformanceTests: XCTestCase {
-
+class PerformanceTests: TestCase {
     var workload: [MessagePack] = []
+    
     override func setUp() {
         if !_isDebugAssertConfiguration() {
             let values: [MessagePack] = [
@@ -65,7 +64,7 @@ class PerformanceTests: XCTestCase {
                     do {
                         _ = try MessagePack.decode(bytes: bytes)
                     } catch {
-                        XCTFail("unexpected error: \(error)")
+                        fail("unexpected error: \(error)")
                     }
                 }
             }
@@ -105,7 +104,7 @@ class PerformanceTests: XCTestCase {
                             _ = String(try decoder.decode() as MessagePack)
                             _ = String(try decoder.decode() as MessagePack)
                         } catch {
-                            XCTFail("unexpected error: \(error)")
+                            fail("unexpected error: \(error)")
                         }
 
                     }
@@ -147,7 +146,7 @@ class PerformanceTests: XCTestCase {
                             _ = try decoder.decode() as String
                             _ = try decoder.decode() as String
                         } catch {
-                            XCTFail("unexpected error: \(error)")
+                            fail("unexpected error: \(error)")
                         }
                     }
                 }
@@ -155,12 +154,10 @@ class PerformanceTests: XCTestCase {
         }
     }
 
-    static var allTests : [(String, (PerformanceTests) -> () throws -> Void)] {
-        return [
-            ("testMessagePackEncoder", testMessagePackEncoder),
-            ("testMessagePackDecoder", testMessagePackDecoder),
-            ("testDecode", testDecode),
-            ("testDecodeRaw", testDecodeRaw),
-        ]
-    }
+    static var allTests = [
+        ("testMessagePackEncoder", testMessagePackEncoder),
+        ("testMessagePackDecoder", testMessagePackDecoder),
+        ("testDecode", testDecode),
+        ("testDecodeRaw", testDecodeRaw),
+    ]
 }
