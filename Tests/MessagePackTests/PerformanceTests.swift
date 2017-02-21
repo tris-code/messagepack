@@ -44,26 +44,26 @@ class PerformanceTests: XCTestCase {
     }
 
     // 0.303 sec
-    func testMessagePackSerializer() {
+    func testMessagePackEncoder() {
         if !_isDebugAssertConfiguration() {
             let object = MessagePack(workload)
             measure {
                 for _ in 0..<1_000 {
-                    _ = MessagePack.serialize(object)
+                    _ = MessagePack.encode(object)
                 }
             }
         }
     }
 
     // 1.618 sec
-    func testMessagePackDeserializer() {
+    func testMessagePackDecoder() {
         if !_isDebugAssertConfiguration() {
-            let bytes = MessagePack.serialize(MessagePack(workload))
+            let bytes = MessagePack.encode(MessagePack(workload))
 
             measure {
                 for _ in 0..<1_000 {
                     do {
-                        _ = try MessagePack.deserialize(bytes: bytes)
+                        _ = try MessagePack.decode(bytes: bytes)
                     } catch {
                         XCTFail("unexpected error: \(error)")
                     }
@@ -73,37 +73,37 @@ class PerformanceTests: XCTestCase {
     }
 
     // 1.670 sec
-    func testMPDeserializer() {
+    func testDecode() {
         if !_isDebugAssertConfiguration() {
-            var packer = MPSerializer()
+            var encoder = Encoder()
             for value in workload {
-                packer.pack(value)
+                encoder.encode(value)
             }
-            let bytes = packer.bytes
+            let bytes = encoder.bytes
 
             measure {
                 for _ in 0..<1000 {
-                    var unpacker = MPDeserializer(bytes: bytes)
+                    var decoder = Decoder(bytes: bytes)
                     for _ in 0..<100 {
                         do {
-                            _ = UInt8(try unpacker.unpack() as MessagePack)
-                            _ = UInt16(try unpacker.unpack() as MessagePack)
-                            _ = UInt32(try unpacker.unpack() as MessagePack)
-                            _ = UInt64(try unpacker.unpack() as MessagePack)
-                            _ = Int8(try unpacker.unpack() as MessagePack)
-                            _ = Int16(try unpacker.unpack() as MessagePack)
-                            _ = Int32(try unpacker.unpack() as MessagePack)
-                            _ = Int64(try unpacker.unpack() as MessagePack)
-                            _ = Float(try unpacker.unpack() as MessagePack)
-                            _ = Double(try unpacker.unpack() as MessagePack)
-                            _ = [MessagePack](try unpacker.unpack() as MessagePack)
-                            _ = [MessagePack : MessagePack](try unpacker.unpack() as MessagePack)
-                            _ = Bool(try unpacker.unpack() as MessagePack)
-                            _ = Bool(try unpacker.unpack() as MessagePack)
-                            _ = String(try unpacker.unpack() as MessagePack)
-                            _ = String(try unpacker.unpack() as MessagePack)
-                            _ = String(try unpacker.unpack() as MessagePack)
-                            _ = String(try unpacker.unpack() as MessagePack)
+                            _ = UInt8(try decoder.decode() as MessagePack)
+                            _ = UInt16(try decoder.decode() as MessagePack)
+                            _ = UInt32(try decoder.decode() as MessagePack)
+                            _ = UInt64(try decoder.decode() as MessagePack)
+                            _ = Int8(try decoder.decode() as MessagePack)
+                            _ = Int16(try decoder.decode() as MessagePack)
+                            _ = Int32(try decoder.decode() as MessagePack)
+                            _ = Int64(try decoder.decode() as MessagePack)
+                            _ = Float(try decoder.decode() as MessagePack)
+                            _ = Double(try decoder.decode() as MessagePack)
+                            _ = [MessagePack](try decoder.decode() as MessagePack)
+                            _ = [MessagePack : MessagePack](try decoder.decode() as MessagePack)
+                            _ = Bool(try decoder.decode() as MessagePack)
+                            _ = Bool(try decoder.decode() as MessagePack)
+                            _ = String(try decoder.decode() as MessagePack)
+                            _ = String(try decoder.decode() as MessagePack)
+                            _ = String(try decoder.decode() as MessagePack)
+                            _ = String(try decoder.decode() as MessagePack)
                         } catch {
                             XCTFail("unexpected error: \(error)")
                         }
@@ -115,37 +115,37 @@ class PerformanceTests: XCTestCase {
     }
 
     // 1.627 sec
-    func testMPDeserializerRaw() {
+    func testDecodeRaw() {
         if !_isDebugAssertConfiguration() {
-            var packer = MPSerializer()
+            var encoder = Encoder()
             for value in workload {
-                packer.pack(value)
+                encoder.encode(value)
             }
-            let bytes = packer.bytes
+            let bytes = encoder.bytes
 
             measure {
                 for _ in 0..<1000 {
-                    var unpacker = MPDeserializer(bytes: bytes)
+                    var decoder = Decoder(bytes: bytes)
                     for _ in 0..<100 {
                         do {
-                            _ = try unpacker.unpack() as UInt8
-                            _ = try unpacker.unpack() as UInt16
-                            _ = try unpacker.unpack() as UInt32
-                            _ = try unpacker.unpack() as UInt64
-                            _ = try unpacker.unpack() as Int8
-                            _ = try unpacker.unpack() as Int16
-                            _ = try unpacker.unpack() as Int32
-                            _ = try unpacker.unpack() as Int64
-                            _ = try unpacker.unpack() as Float
-                            _ = try unpacker.unpack() as Double
-                            _ = try unpacker.unpack() as [MessagePack]
-                            _ = try unpacker.unpack() as [MessagePack : MessagePack]
-                            _ = try unpacker.unpack() as Bool
-                            _ = try unpacker.unpack() as Bool
-                            _ = try unpacker.unpack() as String
-                            _ = try unpacker.unpack() as String
-                            _ = try unpacker.unpack() as String
-                            _ = try unpacker.unpack() as String
+                            _ = try decoder.decode() as UInt8
+                            _ = try decoder.decode() as UInt16
+                            _ = try decoder.decode() as UInt32
+                            _ = try decoder.decode() as UInt64
+                            _ = try decoder.decode() as Int8
+                            _ = try decoder.decode() as Int16
+                            _ = try decoder.decode() as Int32
+                            _ = try decoder.decode() as Int64
+                            _ = try decoder.decode() as Float
+                            _ = try decoder.decode() as Double
+                            _ = try decoder.decode() as [MessagePack]
+                            _ = try decoder.decode() as [MessagePack : MessagePack]
+                            _ = try decoder.decode() as Bool
+                            _ = try decoder.decode() as Bool
+                            _ = try decoder.decode() as String
+                            _ = try decoder.decode() as String
+                            _ = try decoder.decode() as String
+                            _ = try decoder.decode() as String
                         } catch {
                             XCTFail("unexpected error: \(error)")
                         }
@@ -157,11 +157,10 @@ class PerformanceTests: XCTestCase {
 
     static var allTests : [(String, (PerformanceTests) -> () throws -> Void)] {
         return [
-            ("testMessagePackSerializer", testMessagePackSerializer),
-            ("testMessagePackDeserializer", testMessagePackDeserializer),
-            ("testMPDeserializer", testMPDeserializer),
-            ("testMPDeserializerRaw", testMPDeserializerRaw),
+            ("testMessagePackEncoder", testMessagePackEncoder),
+            ("testMessagePackDecoder", testMessagePackDecoder),
+            ("testDecode", testDecode),
+            ("testDecodeRaw", testDecodeRaw),
         ]
     }
 }
-

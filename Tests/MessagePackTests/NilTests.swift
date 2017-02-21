@@ -12,22 +12,22 @@ import XCTest
 import MessagePack
 
 class NilTests: XCTestCase {
-    func testSerializerNil() {
+    func testEncodeNil() {
         let expected: [UInt8] = [0xc0]
-        let packed = MessagePack.serialize(.nil)
-        XCTAssertEqual(packed, expected)
+        let encoded = MessagePack.encode(.nil)
+        XCTAssertEqual(encoded, expected)
     }
 
-    func testDeserializerNil() {
+    func testDecodeNil() {
         let expected = MessagePack.nil
-        let unpacked = try? MessagePack.deserialize(bytes: [0xc0])
-        XCTAssertEqual(unpacked, expected)
+        let decoded = try? MessagePack.decode(bytes: [0xc0])
+        XCTAssertEqual(decoded, expected)
     }
 
     static var allTests : [(String, (NilTests) -> () throws -> Void)] {
         return [
-            ("testSerializerNil", testSerializerNil),
-            ("testDeserializerNil", testDeserializerNil)
+            ("testEncodeNil", testEncodeNil),
+            ("testDecodeNil", testDecodeNil)
         ]
     }
 }

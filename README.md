@@ -39,40 +39,44 @@ public enum MessagePack {
 
 You can find this code and more in [examples](https://github.com/tris-foundation/examples).
 
+### Encode
+
 ```swift
     let hey = MessagePack("hey there!")
-    let bytes = MessagePack.serialize(hey)
-    let original = String(MessagePack.deserialize(bytes: bytes))
+    let bytes = MessagePack.encode(hey)
+    let original = String(MessagePack.decode(bytes: bytes))
 ```
 
 ```swift
-    let bytes = MessagePack.serialize(.array([.int(1), .string("two")]))
+    let bytes = MessagePack.encode(.array([.int(1), .string("two")]))
 ```
 
 ```swift
-    var serializer = MPSerializer()
-    serializer.pack(.string("one"))
-    serializer.pack(.int(2))
-    serializer.pack(.double(3.0))
+    var encoder = Encoder()
+    encoder.encode(.string("one"))
+    encoder.encode(.int(2))
+    encoder.encode(.double(3.0))
 
-    let bytes = serializer.bytes
+    let bytes = encoder.bytes
 ```
 
+### Decode
+
 ```swift
-    var deserializer = MPDeserializer(bytes: [UInt8](..))
+    var decoder = Decoder(bytes: [UInt8](..))
 
     // throws on invalid data
-    let value = try deserializer.unpack() as MessagePack
+    let value = try decoder.decode() as MessagePack
     // you can avoid extra MessagePack object creation
     // if you know the data structure
     // throws on wrong type
-    let int = try deserializer.unpack() as UInt8
-    let string = try deserializer.unpack() as String
-    let double = try deserializer.unpack() as Double
+    let int = try decoder.decode() as UInt8
+    let string = try decoder.decode() as String
+    let double = try decoder.decode() as Double
 
 ```
 
 ```swift
-    var unsafeDeserializer = MPDeserializer(bytesNoCopy: UnsafeBufferPointer<UInt8>(..))
-    var unsafeDeserializer = MPDeserializer(bytesNoCopy: UnsafePointer<UInt8>(..), count: N)
+    var unsafe = Decoder(bytesNoCopy: UnsafeBufferPointer<UInt8>(..))
+    var unsafe = Decoder(bytesNoCopy: UnsafePointer<UInt8>(..), count: N)
 ```

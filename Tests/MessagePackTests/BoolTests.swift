@@ -12,36 +12,36 @@ import XCTest
 import MessagePack
 
 class BoolTests: XCTestCase {
-    func testSerializerBoolFalse() {
+    func testEncodeBoolFalse() {
         let expected: [UInt8] = [0xc2]
-        let packed = MessagePack.serialize(.bool(false))
-        XCTAssertEqual(packed, expected)
+        let encoded = MessagePack.encode(.bool(false))
+        XCTAssertEqual(encoded, expected)
     }
 
-    func testDeserializerBoolFalse() {
+    func testDecodeBoolFalse() {
         let expected = MessagePack.bool(false)
-        let unpacked = try? MessagePack.deserialize(bytes: [0xc2])
-        XCTAssertEqual(unpacked, expected)
+        let decoded = try? MessagePack.decode(bytes: [0xc2])
+        XCTAssertEqual(decoded, expected)
     }
 
-    func testSerializerBoolTrue() {
+    func testEncodeBoolTrue() {
         let expected: [UInt8] = [0xc3]
-        let packed = MessagePack.serialize(.bool(true))
-        XCTAssertEqual(packed, expected)
+        let encoded = MessagePack.encode(.bool(true))
+        XCTAssertEqual(encoded, expected)
     }
 
-    func testDeserializerBoolTrue() {
+    func testDecodeBoolTrue() {
         let expected = MessagePack.bool(true)
-        let unpacked = try? MessagePack.deserialize(bytes: [0xc3])
-        XCTAssertEqual(unpacked, expected)
+        let decoded = try? MessagePack.decode(bytes: [0xc3])
+        XCTAssertEqual(decoded, expected)
     }
 
     static var allTests : [(String, (BoolTests) -> () throws -> Void)] {
         return [
-            ("testSerializerBoolFalse", testSerializerBoolFalse),
-            ("testDeserializerBoolFalse", testDeserializerBoolFalse),
-            ("testSerializerBoolTrue", testSerializerBoolTrue),
-            ("testDeserializerBoolTrue", testDeserializerBoolTrue)
+            ("testEncodeBoolFalse", testEncodeBoolFalse),
+            ("testDecodeBoolFalse", testDecodeBoolFalse),
+            ("testEncodeBoolTrue", testEncodeBoolTrue),
+            ("testDecodeBoolTrue", testDecodeBoolTrue)
         ]
     }
 }

@@ -12,47 +12,47 @@ import XCTest
 import MessagePack
 
 class BinaryTests: XCTestCase {
-    func testSerializerBin8() {
+    func testEncodeBin8() {
         let raw = [UInt8](repeating: 0x45, count: Int(UInt8.max))
         let expected = [0xc4, 0xff] + raw
-        let packed = MessagePack.serialize(.binary(raw))
-        XCTAssertEqual(packed, expected)
+        let encoded = MessagePack.encode(.binary(raw))
+        XCTAssertEqual(encoded, expected)
 
     }
 
-    func testDeserializerBin8() {
+    func testDecodeBin8() {
         let raw = [UInt8](repeating: 0x45, count: Int(UInt8.max))
         let expected = MessagePack.binary(raw)
-        let unpacked = try? MessagePack.deserialize(bytes: [0xc4, 0xff] + raw)
-        XCTAssertEqual(unpacked, expected)
+        let decoded = try? MessagePack.decode(bytes: [0xc4, 0xff] + raw)
+        XCTAssertEqual(decoded, expected)
     }
 
-    func testSerializerBin16() {
+    func testEncodeBin16() {
         let raw = [UInt8](repeating: 0x45, count: Int(UInt16.max))
         let expected = [0xc5, 0xff, 0xff] + raw
-        let packed = MessagePack.serialize(.binary(raw))
-        XCTAssertEqual(packed, expected)
+        let encoded = MessagePack.encode(.binary(raw))
+        XCTAssertEqual(encoded, expected)
     }
 
-    func testDeserializerBin16() {
+    func testDecodeBin16() {
         let raw = [UInt8](repeating: 0x45, count: Int(UInt16.max))
         let expected = MessagePack.binary(raw)
-        let unpacked = try? MessagePack.deserialize(bytes: [0xc5, 0xff, 0xff] + raw)
-        XCTAssertEqual(unpacked, expected)
+        let decoded = try? MessagePack.decode(bytes: [0xc5, 0xff, 0xff] + raw)
+        XCTAssertEqual(decoded, expected)
     }
 
-    func testSerializerBin32() {
+    func testEncodeBin32() {
         let raw = [UInt8](repeating: 0x45, count: Int(UInt16.max)+1)
         let expected = [0xc6, 0x00, 0x01, 0x00, 0x00] + raw
-        let packed = MessagePack.serialize(.binary(raw))
-        XCTAssertEqual(packed, expected)
+        let encoded = MessagePack.encode(.binary(raw))
+        XCTAssertEqual(encoded, expected)
     }
 
-    func testDeserializerBin32() {
+    func testDecodeBin32() {
         let raw = [UInt8](repeating: 0x45, count: Int(UInt16.max)+1)
         let expected = MessagePack.binary(raw)
-        let unpacked = try? MessagePack.deserialize(bytes: [0xc6, 0x00, 0x01, 0x00, 0x00] + raw)
-        XCTAssertEqual(unpacked, expected)
+        let decoded = try? MessagePack.decode(bytes: [0xc6, 0x00, 0x01, 0x00, 0x00] + raw)
+        XCTAssertEqual(decoded, expected)
     }
 
     func testEmptyBinary() {
@@ -62,7 +62,7 @@ class BinaryTests: XCTestCase {
             [0xc6, 0x00, 0x00, 0x00, 0x00],
         ]
         for bytes in binArray {
-            if let empty = try? MessagePack.deserialize(bytes: bytes) {
+            if let empty = try? MessagePack.decode(bytes: bytes) {
                 XCTAssertEqual(empty.binary!, [])
             } else {
                 XCTFail("deserialize failed")
@@ -72,12 +72,12 @@ class BinaryTests: XCTestCase {
 
     static var allTests : [(String, (BinaryTests) -> () throws -> Void)] {
         return [
-            ("testSerializerBin8", testSerializerBin8),
-            ("testDeserializerBin8", testDeserializerBin8),
-            ("testSerializerBin16", testSerializerBin16),
-            ("testDeserializerBin16", testDeserializerBin16),
-            ("testSerializerBin32", testSerializerBin32),
-            ("testDeserializerBin32", testDeserializerBin32),
+            ("testEncodeBin8", testEncodeBin8),
+            ("testDecodeBin8", testDecodeBin8),
+            ("testEncodeBin16", testEncodeBin16),
+            ("testDecodeBin16", testDecodeBin16),
+            ("testEncodeBin32", testEncodeBin32),
+            ("testDecodeBin32", testDecodeBin32),
             ("testEmptyBinary", testEmptyBinary),
         ]
     }

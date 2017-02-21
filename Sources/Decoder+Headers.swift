@@ -8,8 +8,8 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-extension MPDeserializer {
-    mutating func readStringLength(code: UInt8) throws -> Int {
+extension Decoder {
+    mutating func readStringHeader(code: UInt8) throws -> Int {
         switch code {
         case 0xa0...0xbf: return Int(code - 0xa0)
         case 0xd9: return Int(try readUInt8())
@@ -19,7 +19,7 @@ extension MPDeserializer {
         }
     }
 
-    mutating func readArrayLength(code: UInt8) throws -> Int {
+    mutating func readArrayHeader(code: UInt8) throws -> Int {
         switch code {
         case 0x90...0x9f: return Int(code - 0x90)
         case 0xdc: return Int(try readUInt16())
@@ -28,7 +28,7 @@ extension MPDeserializer {
         }
     }
 
-    mutating func readMapLength(code: UInt8) throws -> Int {
+    mutating func readMapHeader(code: UInt8) throws -> Int {
         switch code {
         case 0x80...0x8f: return Int(code - 0x80)
         case 0xde: return Int(try readUInt16())
@@ -37,7 +37,7 @@ extension MPDeserializer {
         }
     }
 
-    mutating func readBinaryLength(code: UInt8) throws -> Int {
+    mutating func readBinaryHeader(code: UInt8) throws -> Int {
         switch code {
         case 0xc4: return Int(try readUInt8())
         case 0xc5: return Int(try readUInt16())
@@ -46,7 +46,7 @@ extension MPDeserializer {
         }
     }
 
-    mutating func readExtendedLength(code: UInt8) throws -> Int {
+    mutating func readExtendedHeader(code: UInt8) throws -> Int {
         switch code {
         case 0xd4: return 1
         case 0xd5: return 2
