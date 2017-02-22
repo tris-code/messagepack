@@ -51,8 +51,8 @@ let original = String(try MessagePack.decode(bytes: bytes))
 
 ```swift
 var encoder = Encoder()
-encoder.encode(.int(2))
 encoder.encode(.string("one"))
+encoder.encode(.int(2))
 encoder.encode(.double(3.0))
 let encoded = encoder.bytes
 // be careful, we use raw pointer here
@@ -63,7 +63,7 @@ let value = try decoder.decode() as MessagePack
 decoder.rewind()
 // you can avoid extra MessagePack object if you sure about structure
 // throws on wrong type
-let int = try decoder.decode() as UInt8
 let string = try decoder.decode() as String
+let int = try decoder.decode() as UInt8
 let double = try decoder.decode() as Double
 ```
