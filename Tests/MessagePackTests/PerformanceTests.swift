@@ -12,6 +12,7 @@ import MessagePack
 
 class PerformanceTests: TestCase {
     var workload: [MessagePack] = []
+    var iterations = 0
     
     override func setUp() {
         if !_isDebugAssertConfiguration() {
@@ -26,52 +27,48 @@ class PerformanceTests: TestCase {
                 MessagePack(Int64.min+1),
                 MessagePack(Float(3.14)),
                 MessagePack(Double(3.14)),
-                MessagePack([.int(0),.int(0),.int(0),.int(0),.int(0),.int(0),.int(0),.int(0)]),
+                MessagePack([.int(0),.int(1),.int(2),.int(3),.int(4),.int(5),.int(6),.int(7)]),
                 MessagePack([0:0,1:1,2:2,3:3,4:4,5:5]),
                 MessagePack(true),
                 MessagePack(false),
-                MessagePack("Hello, World!"),
-                MessagePack("Hello, World! Hello, World! Hello, World!"),
-                MessagePack("Hello, World! Hello, World! Hello, World! Hello, World! Hello, World!"),
-                MessagePack("Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World!")
+                MessagePack("Hello, World!")
             ]
 
-            for _ in 0..<100 {
+            // make a million MessagePack objects
+            // (including array and dictionary items)
+            iterations = 1_000_000 / (values.count + 8 + 6)
+            for _ in 0..<iterations {
                 workload.append(contentsOf: values)
             }
         }
     }
 
-    // 0.303 sec
+    // 0.023 sec
     func testMessagePackEncoder() {
         if !_isDebugAssertConfiguration() {
             let object = MessagePack(workload)
             measure {
-                for _ in 0..<1_000 {
-                    _ = MessagePack.encode(object)
-                }
+                _ = MessagePack.encode(object)
             }
         }
     }
 
-    // 1.618 sec
+    // 0.128 sec
     func testMessagePackDecoder() {
         if !_isDebugAssertConfiguration() {
             let bytes = MessagePack.encode(MessagePack(workload))
 
             measure {
-                for _ in 0..<1_000 {
-                    do {
-                        _ = try MessagePack.decode(bytes: bytes)
-                    } catch {
-                        fail("unexpected error: \(error)")
-                    }
+                do {
+                    _ = try MessagePack.decode(bytes: bytes)
+                } catch {
+                    fail("unexpected error: \(error)")
                 }
             }
         }
     }
 
-    // 1.670 sec
+    // 0.111 sec
     func testDecode() {
         if !_isDebugAssertConfiguration() {
             var encoder = Encoder()
@@ -81,40 +78,34 @@ class PerformanceTests: TestCase {
             let bytes = encoder.bytes
 
             measure {
-                for _ in 0..<1000 {
-                    var decoder = Decoder(bytes: bytes)
-                    for _ in 0..<100 {
-                        do {
-                            _ = UInt8(try decoder.decode() as MessagePack)
-                            _ = UInt16(try decoder.decode() as MessagePack)
-                            _ = UInt32(try decoder.decode() as MessagePack)
-                            _ = UInt64(try decoder.decode() as MessagePack)
-                            _ = Int8(try decoder.decode() as MessagePack)
-                            _ = Int16(try decoder.decode() as MessagePack)
-                            _ = Int32(try decoder.decode() as MessagePack)
-                            _ = Int64(try decoder.decode() as MessagePack)
-                            _ = Float(try decoder.decode() as MessagePack)
-                            _ = Double(try decoder.decode() as MessagePack)
-                            _ = [MessagePack](try decoder.decode() as MessagePack)
-                            _ = [MessagePack : MessagePack](try decoder.decode() as MessagePack)
-                            _ = Bool(try decoder.decode() as MessagePack)
-                            _ = Bool(try decoder.decode() as MessagePack)
-                            _ = String(try decoder.decode() as MessagePack)
-                            _ = String(try decoder.decode() as MessagePack)
-                            _ = String(try decoder.decode() as MessagePack)
-                            _ = String(try decoder.decode() as MessagePack)
-                        } catch {
-                            fail("unexpected error: \(error)")
-                        }
-
+                var decoder = Decoder(bytes: bytes, count: bytes.count)
+                for _ in 0..<self.iterations {
+                    do {
+                        _ = UInt8(try decoder.decode() as MessagePack)
+                        _ = UInt16(try decoder.decode() as MessagePack)
+                        _ = UInt32(try decoder.decode() as MessagePack)
+                        _ = UInt64(try decoder.decode() as MessagePack)
+                        _ = Int8(try decoder.decode() as MessagePack)
+                        _ = Int16(try decoder.decode() as MessagePack)
+                        _ = Int32(try decoder.decode() as MessagePack)
+                        _ = Int64(try decoder.decode() as MessagePack)
+                        _ = Float(try decoder.decode() as MessagePack)
+                        _ = Double(try decoder.decode() as MessagePack)
+                        _ = [MessagePack](try decoder.decode() as MessagePack)
+                        _ = [MessagePack : MessagePack](try decoder.decode() as MessagePack)
+                        _ = Bool(try decoder.decode() as MessagePack)
+                        _ = Bool(try decoder.decode() as MessagePack)
+                        _ = String(try decoder.decode() as MessagePack)
+                    } catch {
+                        fail("unexpected error: \(error)")
                     }
                 }
             }
         }
     }
 
-    // 1.627 sec
-    func testDecodeRaw() {
+    // 0.103 sec
+    func testDecodeExact() {
         if !_isDebugAssertConfiguration() {
             var encoder = Encoder()
             for value in workload {
@@ -123,31 +114,26 @@ class PerformanceTests: TestCase {
             let bytes = encoder.bytes
 
             measure {
-                for _ in 0..<1000 {
-                    var decoder = Decoder(bytes: bytes)
-                    for _ in 0..<100 {
-                        do {
-                            _ = try decoder.decode() as UInt8
-                            _ = try decoder.decode() as UInt16
-                            _ = try decoder.decode() as UInt32
-                            _ = try decoder.decode() as UInt64
-                            _ = try decoder.decode() as Int8
-                            _ = try decoder.decode() as Int16
-                            _ = try decoder.decode() as Int32
-                            _ = try decoder.decode() as Int64
-                            _ = try decoder.decode() as Float
-                            _ = try decoder.decode() as Double
-                            _ = try decoder.decode() as [MessagePack]
-                            _ = try decoder.decode() as [MessagePack : MessagePack]
-                            _ = try decoder.decode() as Bool
-                            _ = try decoder.decode() as Bool
-                            _ = try decoder.decode() as String
-                            _ = try decoder.decode() as String
-                            _ = try decoder.decode() as String
-                            _ = try decoder.decode() as String
-                        } catch {
-                            fail("unexpected error: \(error)")
-                        }
+                var decoder = Decoder(bytes: bytes, count: bytes.count)
+                for _ in 0..<self.iterations {
+                    do {
+                        _ = try decoder.decode() as UInt8
+                        _ = try decoder.decode() as UInt16
+                        _ = try decoder.decode() as UInt32
+                        _ = try decoder.decode() as UInt64
+                        _ = try decoder.decode() as Int8
+                        _ = try decoder.decode() as Int16
+                        _ = try decoder.decode() as Int32
+                        _ = try decoder.decode() as Int64
+                        _ = try decoder.decode() as Float
+                        _ = try decoder.decode() as Double
+                        _ = try decoder.decode() as [MessagePack]
+                        _ = try decoder.decode() as [MessagePack : MessagePack]
+                        _ = try decoder.decode() as Bool
+                        _ = try decoder.decode() as Bool
+                        _ = try decoder.decode() as String
+                    } catch {
+                        fail("unexpected error: \(error)")
                     }
                 }
             }
@@ -158,6 +144,6 @@ class PerformanceTests: TestCase {
         ("testMessagePackEncoder", testMessagePackEncoder),
         ("testMessagePackDecoder", testMessagePackDecoder),
         ("testDecode", testDecode),
-        ("testDecodeRaw", testDecodeRaw),
+        ("testDecodeExact", testDecodeExact),
     ]
 }
