@@ -39,44 +39,31 @@ public enum MessagePack {
 
 You can find this code and more in [examples](https://github.com/tris-foundation/examples).
 
-### Encode
+### Convenience API
 
 ```swift
-    let hey = MessagePack("hey there!")
-    let bytes = MessagePack.encode(hey)
-    let original = String(MessagePack.decode(bytes: bytes))
+let hey = MessagePack("hey there!")
+let bytes = MessagePack.encode(hey)
+let original = String(try MessagePack.decode(bytes: bytes))
 ```
 
-```swift
-    let bytes = MessagePack.encode(.array([.int(1), .string("two")]))
-```
+### Performance optimized
 
 ```swift
-    var encoder = Encoder()
-    encoder.encode(.string("one"))
-    encoder.encode(.int(2))
-    encoder.encode(.double(3.0))
-
-    let bytes = encoder.bytes
-```
-
-### Decode
-
-```swift
-    var decoder = Decoder(bytes: [UInt8](..))
-
-    // throws on invalid data
-    let value = try decoder.decode() as MessagePack
-    // you can avoid extra MessagePack object creation
-    // if you know the data structure
-    // throws on wrong type
-    let int = try decoder.decode() as UInt8
-    let string = try decoder.decode() as String
-    let double = try decoder.decode() as Double
-
-```
-
-```swift
-    var unsafe = Decoder(bytesNoCopy: UnsafeBufferPointer<UInt8>(..))
-    var unsafe = Decoder(bytesNoCopy: UnsafePointer<UInt8>(..), count: N)
+var encoder = Encoder()
+encoder.encode(.int(2))
+encoder.encode(.string("one"))
+encoder.encode(.double(3.0))
+let encoded = encoder.bytes
+// be careful, we use raw pointer here
+var decoder = Decoder(bytes: encoded, count: encoded.count)
+// throws on invalid data
+let value = try decoder.decode() as MessagePack
+// reuse decoder
+decoder.rewind()
+// you can avoid extra MessagePack object if you sure about structure
+// throws on wrong type
+let int = try decoder.decode() as UInt8
+let string = try decoder.decode() as String
+let double = try decoder.decode() as Double
 ```
