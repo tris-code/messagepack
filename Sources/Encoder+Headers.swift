@@ -29,7 +29,7 @@ extension Encoder {
     mutating func writeArrayHeader(count: Int) {
         precondition(count <= 0xffff_ffff)
         switch count {
-        case let count where count <= 0xe:
+        case let count where count <= 0xf:
             write(code: 0x90 | UInt8(count))
         case let count where count <= 0xffff:
             write(code: 0xdc)
@@ -43,7 +43,7 @@ extension Encoder {
     mutating func writeMapHeader(count: Int) {
         precondition(count < 0xffff_ffff)
         switch count {
-        case let count where count <= 0xe:
+        case let count where count <= 0xf:
             write(code: 0x80 | UInt8(count))
         case let count where count <= 0xffff:
             write(code: 0xde)

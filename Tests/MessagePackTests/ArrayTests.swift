@@ -63,6 +63,12 @@ class ArrayTests: TestCase {
         }
     }
 
+    func testFixArraySize() {
+        let items = [MessagePack](repeating: .int(1), count: 15)
+        let bytes = MessagePack.encode(.array(items))
+        assertEqual(bytes.count, 16)
+    }
+
     static var allTests = [
         ("testEncodeFixArray", testEncodeFixArray),
         ("testDecodeFixarray", testDecodeFixarray),
@@ -71,5 +77,6 @@ class ArrayTests: TestCase {
         ("testEncodeArray32", testEncodeArray32),
         ("testDecodeArray32", testDecodeArray32),
         ("testEmptyArray", testEmptyArray),
+        ("testFixArraySize", testFixArraySize),
     ]
 }

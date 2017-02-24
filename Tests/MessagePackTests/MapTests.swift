@@ -83,6 +83,15 @@ class MapTests: TestCase {
         }
     }
 
+    func testFixMapSize() {
+        var items = [MessagePack : MessagePack]()
+        for i in 1...15 {
+            items[.int(i)] = .int(i)
+        }
+        let bytes = MessagePack.encode(.map(items))
+        assertEqual(bytes.count, 31)
+    }
+
     static var allTests = [
         ("testEncodeFixMap", testEncodeFixMap),
         ("testDecodeFixMap", testDecodeFixMap),
@@ -90,6 +99,7 @@ class MapTests: TestCase {
         ("testDecodeMap16", testDecodeMap16),
         ("testEncodeMap32", testEncodeMap32),
         ("testDecodeMap32", testDecodeMap32),
-        ("testEmptyMap", testEmptyMap)
+        ("testEmptyMap", testEmptyMap),
+        ("testFixMapSize", testFixMapSize)
     ]
 }
