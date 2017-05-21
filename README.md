@@ -5,7 +5,7 @@
 ## Package.swift
 
 ```swift
-.Package(url: "https://github.com/tris-foundation/messagepack.git", majorVersion: 0)
+.Package(url: "https://github.com/tris-foundation/messagepack.git", majorVersion: 0, minor: 3)
 ```
 
 ## Memo
@@ -61,7 +61,7 @@ var decoder = Decoder(bytes: encoded, count: encoded.count)
 let value = try decoder.decode()
 // reuse decoder
 decoder.rewind()
-// you can avoid extra MessagePack object 
+// you can avoid extra MessagePack object
 // if you sure about the structure
 // throws on wrong type
 let string = try decoder.decode(String.self)
