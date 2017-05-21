@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Test",
+        "repositoryURL": "https://github.com/tris-foundation/test.git",
+        "state": {
+          "branch": null,
+          "revision": "408fd89c2a56a03237c9c5a98016ffcc115352ff",
+          "version": "0.4.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

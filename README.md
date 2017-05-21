@@ -5,7 +5,7 @@
 ## Package.swift
 
 ```swift
-.Package(url: "https://github.com/tris-foundation/messagepack.git", majorVersion: 0, minor: 3)
+.package(url: "https://github.com/tris-foundation/messagepack.git", from: "0.4.0")
 ```
 
 ## Memo
