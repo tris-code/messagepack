@@ -29,6 +29,7 @@ XCTMain([
     testCase(IntegerTests.allTests),
     testCase(InvalidHeaderTests.allTests),
     testCase(LiteralConvertibleTests.allTests),
+    testCase(ManualHeadersTests.allTests),
     testCase(MapTests.allTests),
     testCase(MessagePackInitializableTests.allTests),
     testCase(NilTests.allTests),
