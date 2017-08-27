@@ -8,7 +8,7 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-extension Decoder {
+extension UnsafeMessagePackDecoder {
     mutating func readStringHeader(code: UInt8) throws -> Int {
         switch code {
         case 0xa0...0xbf: return Int(code - 0xa0)
