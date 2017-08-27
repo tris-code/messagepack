@@ -10,7 +10,7 @@
 
 extension MessagePack {
     public static func encode(_ object: MessagePack) -> [UInt8] {
-        var encoder = Encoder()
+        var encoder = MessagePackEncoder()
         encoder.encode(object)
         return encoder.bytes
     }

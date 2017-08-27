@@ -8,7 +8,7 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-public struct Encoder {
+public struct MessagePackEncoder {
     public var bytes = [UInt8]()
 
     public init(reservingCapacity capacity: Int = 1024) {
@@ -51,7 +51,7 @@ public struct Encoder {
     }
 }
 
-extension Encoder {
+extension MessagePackEncoder {
     mutating func write(_ value: Int8) {
         write(UInt8(bitPattern: value))
     }
@@ -69,7 +69,7 @@ extension Encoder {
     }
 }
 
-extension Encoder {
+extension MessagePackEncoder {
     mutating func write(code value: UInt8) {
         write(value)
     }
