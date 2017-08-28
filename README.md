@@ -50,13 +50,13 @@ let original = String(try MessagePack.decode(bytes: bytes))
 ### Performance optimized
 
 ```swift
-var encoder = Encoder()
+var encoder = MessagePackEncoder()
 encoder.encode(.string("one"))
 encoder.encode(.int(2))
 encoder.encode(.double(3.0))
 let encoded = encoder.bytes
-// be careful, we use raw pointer here
-var decoder = Decoder(bytes: encoded, count: encoded.count)
+// be careful, we don't copy bytes from the raw pointer
+var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
 // throws on invalid data
 let value = try decoder.decode()
 // reuse decoder
