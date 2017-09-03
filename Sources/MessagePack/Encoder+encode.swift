@@ -8,7 +8,7 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-extension MessagePackEncoder {
+extension RawMessagePackEncoder {
     public mutating func encode(_ value: MessagePack) {
         switch value {
         case .`nil`: encodeNil()

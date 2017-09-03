@@ -15,7 +15,7 @@ class DecodeTests: TestCase {
     func testBool() {
         let expected = true
         let encoded = MessagePack.encode(.bool(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(Bool.self)
         assertEqual(decoded, expected)
     }
@@ -23,7 +23,7 @@ class DecodeTests: TestCase {
     func testFloat() {
         let expected = Float(1.618)
         let encoded = MessagePack.encode(.float(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(Float.self)
         assertEqual(decoded, expected)
     }
@@ -31,7 +31,7 @@ class DecodeTests: TestCase {
     func testDouble() {
         let expected = Double(1.618)
         let encoded = MessagePack.encode(.double(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(Double.self)
         assertEqual(decoded, expected)
     }
@@ -39,7 +39,7 @@ class DecodeTests: TestCase {
     func testString() {
         let expected = "Hello, World!"
         let encoded = MessagePack.encode(.string(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(String.self)
         assertEqual(decoded, expected)
     }
@@ -47,7 +47,7 @@ class DecodeTests: TestCase {
     func testInt() {
         let expected = Int.min
         let encoded = MessagePack.encode(.int(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(Int.self)
         assertEqual(decoded, expected)
     }
@@ -55,7 +55,7 @@ class DecodeTests: TestCase {
     func testUInt() {
         let expected = UInt.max
         let encoded = MessagePack.encode(.uint(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(UInt.self)
         assertEqual(decoded, expected)
     }
@@ -63,7 +63,7 @@ class DecodeTests: TestCase {
     func testUIntToInt() {
         let expected: UInt = 1
         let encoded = MessagePack.encode(.uint(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(Int.self)
         assertEqual(UInt(decoded), expected)
     }
@@ -71,14 +71,14 @@ class DecodeTests: TestCase {
     func testUIntMaxToInt() {
         let expected = UInt.max
         let encoded = MessagePack.encode(.uint(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         assertThrowsError(try decoder.decode(Int.self))
     }
 
     func testBinary() {
         let expected: [UInt8] = [0x01, 0x02, 0x03]
         let encoded = MessagePack.encode(.binary(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode([UInt8].self)
         assertEqual(decoded, expected)
     }
@@ -86,7 +86,7 @@ class DecodeTests: TestCase {
     func testArray() {
         let expected: [MessagePack] = [.string("Hello"), .string("World")]
         let encoded = MessagePack.encode(.array(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode([MessagePack].self)
         assertEqual(decoded, expected)
     }
@@ -95,7 +95,7 @@ class DecodeTests: TestCase {
         typealias Map = [MessagePack : MessagePack]
         let expected: Map = [.string("Hello"): .string("World")]
         let encoded = MessagePack.encode(.map(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(Map.self)
         assertEqual(decoded, expected)
     }
@@ -103,7 +103,7 @@ class DecodeTests: TestCase {
     func testExtended() {
         let expected = MessagePack.Extended(type: 1, data: [0x01, 0x02, 0x03])
         let encoded = MessagePack.encode(.extended(expected))
-        var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
+        var decoder = UnsafeRawMessagePackDecoder(bytes: encoded, count: encoded.count)
         let decoded = try! decoder.decode(MessagePack.Extended.self)
         assertEqual(decoded, expected)
     }
