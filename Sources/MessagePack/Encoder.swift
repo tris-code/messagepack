@@ -10,7 +10,7 @@
 
 import Stream
 
-public class OuputByteStream: OutputStream {
+public class OutputByteStream: OutputStream {
     public var bytes: [UInt8]
 
     public init(reservingCapacity capacity: Int = 1024) {

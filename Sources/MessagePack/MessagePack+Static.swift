@@ -12,7 +12,7 @@ import Stream
 
 extension MessagePack {
     public static func encode(_ object: MessagePack) throws -> [UInt8] {
-        var writer = MessagePackWriter(OuputByteStream())
+        var writer = MessagePackWriter(OutputByteStream())
         try writer.encode(object)
         return writer.stream.bytes
     }

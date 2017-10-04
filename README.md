@@ -60,7 +60,7 @@ let original = String(try MessagePack.decode(from: stream))
 ### Performance optimized
 
 ```swift
-var encoder = MessagePackWriter(OuputByteStream())
+var encoder = MessagePackWriter(OutputByteStream())
 try encoder.encode(.string("one"))
 try encoder.encode(.int(2))
 try encoder.encode(.double(3.0))

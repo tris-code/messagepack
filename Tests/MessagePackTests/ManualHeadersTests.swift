@@ -14,7 +14,7 @@ import MessagePack
 class ManualHeadersTests: TestCase {
     func testEncodeArray() {
         let expected = try! MessagePack.encode(.array(["one", "two", "three"]))
-        var writer = MessagePackWriter(OuputByteStream())
+        var writer = MessagePackWriter(OutputByteStream())
         let items = ["one", "two", "three"]
         try? writer.encodeArrayItemsCount(items.count)
         for item in items {
@@ -43,7 +43,7 @@ class ManualHeadersTests: TestCase {
     func testEncodeMap() {
         let expected = try! MessagePack.encode(
             .map(["one" : 1, "two" : 2, "three" : 3]))
-        var writer = MessagePackWriter(OuputByteStream())
+        var writer = MessagePackWriter(OutputByteStream())
         let items = ["one" : 1, "two" : 2, "three" : 3]
         try? writer.encodeMapItemsCount(items.count)
         for (key, value) in items {
