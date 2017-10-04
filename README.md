@@ -39,31 +39,41 @@ public enum MessagePack {
 
 You can find this code and more in [examples](https://github.com/tris-foundation/examples).
 
-### Convenience API
+### Basic API
 
 ```swift
 let hey = MessagePack("hey there!")
-let bytes = MessagePack.encode(hey)
+let bytes = try MessagePack.encode(hey)
 let original = String(try MessagePack.decode(bytes: bytes))
+```
+
+### Stream API
+
+```swift
+let hey = MessagePack("hey there!")
+let stream = BufferedStream(stream: NetworkStream(socket: client))
+try MessagePack.encode(hey, to: stream)
+try stream.flush()
+let original = String(try MessagePack.decode(from: stream))
 ```
 
 ### Performance optimized
 
 ```swift
-var encoder = MessagePackEncoder()
-encoder.encode(.string("one"))
-encoder.encode(.int(2))
-encoder.encode(.double(3.0))
-let encoded = encoder.bytes
-// be careful, we don't copy bytes from the raw pointer
-var decoder = UnsafeMessagePackDecoder(bytes: encoded, count: encoded.count)
-// throws on invalid data
+var encoder = MessagePackWriter(OuputByteStream())
+try encoder.encode(.string("one"))
+try encoder.encode(.int(2))
+try encoder.encode(.double(3.0))
+let encoded = encoder.stream.bytes
+
+var decoder = MessagePackReader(InputByteStream(encoded))
+// Throws on invalid data.
 let value = try decoder.decode()
-// reuse decoder
-decoder.rewind()
-// you can avoid extra MessagePack object
-// if you sure about the structure
-// throws on wrong type
+
+// You can also avoid extra MessagePack object,
+// if you sure about the structure.
+// Throws on type mismatch.
+decoder = MessagePackReader(InputByteStream(encoded))
 let string = try decoder.decode(String.self)
 let int = try decoder.decode(UInt8.self)
 let double = try decoder.decode(Double.self)
