@@ -8,7 +8,7 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-public struct UnsafeRawMessagePackDecoder {
+public struct MessagePackReader {
     private let buffer: UnsafeRawBufferPointer
     private var position = 0
 
@@ -58,7 +58,7 @@ public struct UnsafeRawMessagePackDecoder {
     }
 }
 
-extension UnsafeRawMessagePackDecoder {
+extension MessagePackReader {
     mutating func readInt8() throws -> Int8 {
         return Int8(bitPattern: try readUInt8())
     }
@@ -76,13 +76,13 @@ extension UnsafeRawMessagePackDecoder {
     }
 }
 
-extension UnsafeRawMessagePackDecoder {
+extension MessagePackReader {
     mutating func readCode() throws -> UInt8 {
         return try readUInt8()
     }
 }
 
-extension UnsafeRawMessagePackDecoder {
+extension MessagePackReader {
     mutating func readInt(code: UInt8) throws -> Int {
         switch code {
         case 0xd0: return Int(try readInt8())

@@ -8,7 +8,7 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-extension UnsafeRawMessagePackDecoder {
+extension MessagePackReader {
     public mutating func decode() throws -> MessagePack {
         let code = try readCode()
         switch code {
