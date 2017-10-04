@@ -35,4 +35,10 @@ XCTMain([
     testCase(NilTests.allTests),
     testCase(StringEncodingTests.allTests),
     testCase(StringTests.allTests),
+
+    testCase(KeyedDecodingContainerTests.allTests),
+    testCase(KeyedEncodingContainerTests.allTests),
+    testCase(MessagePackCodersTests.allTests),
+    testCase(UnkeyedDecodingContainerTests.allTests),
+    testCase(UnkeyedEncodingContainerTests.allTests),
 ])
