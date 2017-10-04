@@ -18,12 +18,16 @@ let package = Package(
     ],
     dependencies: [
         .package(
+            url: "https://github.com/tris-foundation/stream.git",
+            from: "0.4.0"
+        ),
+        .package(
             url: "https://github.com/tris-foundation/test.git",
             from: "0.4.0"
         )
     ],
     targets: [
-        .target(name: "MessagePack"),
+        .target(name: "MessagePack", dependencies: ["Stream"]),
         .testTarget(
             name: "MessagePackTests",
             dependencies: ["MessagePack", "Test"]
