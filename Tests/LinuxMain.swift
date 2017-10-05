@@ -35,6 +35,7 @@ XCTMain([
     testCase(NilTests.allTests),
     testCase(StringEncodingTests.allTests),
     testCase(StringTests.allTests),
+    testCase(TimestampTests.allTests),
 
     testCase(KeyedDecodingContainerTests.allTests),
     testCase(KeyedEncodingContainerTests.allTests),
