@@ -9,6 +9,7 @@
  */
 
 import Test
+import Stream
 @testable import MessagePack
 
 class InvalidHeaderTests: TestCase {
