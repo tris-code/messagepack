@@ -24,7 +24,7 @@ public class MessagePackDecoder {
         let decoder = _MessagePackDecoder(object)
         return try T(from: decoder)
     }
-    
+
     // FIXME: (_ type: Decodable.Type, ...) shadows the generic one
     public func decode(
         decodable type: Decodable.Type, from bytes: [UInt8]

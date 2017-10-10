@@ -8,8 +8,10 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-public enum MessagePackError: Error {
-    case streamWriteError
-    case insufficientData
-    case invalidData
+extension MessagePack {
+    public enum Error: Swift.Error {
+        case streamWriteError
+        case insufficientData
+        case invalidData
+    }
 }

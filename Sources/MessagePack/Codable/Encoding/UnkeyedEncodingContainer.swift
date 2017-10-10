@@ -25,7 +25,7 @@ class MessagePackUnkeyedEncodingContainer
     }
 
     let encoder: _MessagePackEncoder
-    
+
     var values: [MessagePackContainerType]
 
     var value: MessagePack {
