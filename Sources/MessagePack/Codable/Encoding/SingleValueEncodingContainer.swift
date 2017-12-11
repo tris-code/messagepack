@@ -8,7 +8,7 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-class MessagePackSingleValueEncodingContainer
+final class MessagePackSingleValueEncodingContainer
 : SingleValueEncodingContainer, MessagePackContainer {
     var codingPath: [CodingKey] {
         return []
