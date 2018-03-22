@@ -12,6 +12,7 @@ import XCTest
 @testable import MessagePackTests
 
 XCTMain([
+    testCase(AccessorsTests.allTests),
     testCase(ArrayTests.allTests),
     testCase(BinaryTests.allTests),
     testCase(BoolTests.allTests),
@@ -23,7 +24,6 @@ XCTMain([
     testCase(ExtendedTests.allTests),
     testCase(FloatTests.allTests),
     testCase(HashValueTests.allTests),
-    testCase(InitializableTests.allTests),
     testCase(InitTests.allTests),
     testCase(InsufficientDataTests.allTests),
     testCase(IntegerTests.allTests),
