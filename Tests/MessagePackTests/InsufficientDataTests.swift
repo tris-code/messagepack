@@ -9,6 +9,7 @@
  */
 
 import Test
+import Stream
 import MessagePack
 
 class InsufficientDataTests: TestCase {
@@ -32,7 +33,7 @@ class InsufficientDataTests: TestCase {
                 _ = try MessagePack.decode(bytes: bytes)
                 fail("Expected deserializer to throw")
             } catch {
-                assertEqual(error as? MessagePack.Error, .insufficientData)
+                assertEqual(error as? StreamError, .insufficientData)
             }
         }
     }
@@ -46,7 +47,7 @@ class InsufficientDataTests: TestCase {
                 _ = try MessagePack.decode(bytes: bytes)
                 fail("Expected deserializer to throw")
             } catch {
-                assertEqual(error as? MessagePack.Error, .insufficientData)
+                assertEqual(error as? StreamError, .insufficientData)
             }
         }
     }
@@ -68,7 +69,7 @@ class InsufficientDataTests: TestCase {
                 _ = try MessagePack.decode(bytes: bytes)
                 fail("Expected deserializer to throw")
             } catch {
-                assertEqual(error as? MessagePack.Error, .insufficientData)
+                assertEqual(error as? StreamError, .insufficientData)
             }
         }
     }
@@ -87,7 +88,7 @@ class InsufficientDataTests: TestCase {
                 _ = try MessagePack.decode(bytes: bytes)
                 fail("Expected deserializer to throw")
             } catch {
-                assertEqual(error as? MessagePack.Error, .insufficientData)
+                assertEqual(error as? StreamError, .insufficientData)
             }
         }
     }
@@ -106,7 +107,7 @@ class InsufficientDataTests: TestCase {
                 _ = try MessagePack.decode(bytes: bytes)
                 fail("Expected deserializer to throw")
             } catch {
-                assertEqual(error as? MessagePack.Error, .insufficientData)
+                assertEqual(error as? StreamError, .insufficientData)
             }
         }
     }
@@ -125,7 +126,7 @@ class InsufficientDataTests: TestCase {
                 _ = try MessagePack.decode(bytes: bytes)
                 fail("Expected deserializer to throw")
             } catch {
-                assertEqual(error as? MessagePack.Error, .insufficientData)
+                assertEqual(error as? StreamError, .insufficientData)
             }
         }
     }
@@ -146,7 +147,7 @@ class InsufficientDataTests: TestCase {
                 _ = try MessagePack.decode(bytes: bytes)
                 fail("Expected deserializer to throw")
             } catch {
-                assertEqual(error as? MessagePack.Error, .insufficientData)
+                assertEqual(error as? StreamError, .insufficientData)
             }
         }
     }
