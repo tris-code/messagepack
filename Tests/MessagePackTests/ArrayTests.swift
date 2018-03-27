@@ -69,15 +69,4 @@ class ArrayTests: TestCase {
         let bytes = try? MessagePack.encode(.array(items))
         assertEqual(bytes?.count, 16)
     }
-
-    static var allTests = [
-        ("testEncodeFixArray", testEncodeFixArray),
-        ("testDecodeFixarray", testDecodeFixarray),
-        ("testEncodeArray16", testEncodeArray16),
-        ("testDecodeArray16", testDecodeArray16),
-        ("testEncodeArray32", testEncodeArray32),
-        ("testDecodeArray32", testDecodeArray32),
-        ("testEmptyArray", testEmptyArray),
-        ("testFixArraySize", testFixArraySize),
-    ]
 }

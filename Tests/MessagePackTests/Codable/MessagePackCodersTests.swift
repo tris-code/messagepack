@@ -55,9 +55,4 @@ class MessagePackCodersTests: TestCase {
             fail(String(describing: error))
         }
     }
-
-    static var allTests = [
-        ("testEncodable", testEncodable),
-        ("testDecodable", testDecodable)
-    ]
 }

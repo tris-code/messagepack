@@ -68,17 +68,4 @@ class EqualityTests: TestCase {
         let extended = MessagePack.Extended(type: 1, data: [0x01, 0x02, 0x03, 0xff])
         assertEqual(MessagePack.extended(extended), MessagePack.extended(extended))
     }
-
-    static var allTests = [
-        ("testNilEquality", testNilEquality),
-        ("testIntEquality", testIntEquality),
-        ("testUIntEquality", testUIntEquality),
-        ("testBoolEquality", testBoolEquality),
-        ("testFloatEquality", testFloatEquality),
-        ("testStringEquality", testStringEquality),
-        ("testArrayEquality", testArrayEquality),
-        ("testMapEquality", testMapEquality),
-        ("testBinaryEquality", testBinaryEquality),
-        ("testExtendedEquality", testExtendedEquality),
-    ]
 }

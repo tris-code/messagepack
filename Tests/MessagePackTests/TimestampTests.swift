@@ -116,13 +116,4 @@ class TimestampTests: TestCase {
             fail(String(describing: error))
         }
     }
-
-    static var allTests = [
-        ("testEncode4", testEncode4),
-        ("testEncode8", testEncode8),
-        ("testEncode12", testEncode12),
-        ("testDecode4", testDecode4),
-        ("testDecode8", testDecode8),
-        ("testDecode12", testDecode12),
-    ]
 }

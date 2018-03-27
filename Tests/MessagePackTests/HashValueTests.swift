@@ -76,18 +76,4 @@ class HashValueTests: TestCase {
         assertEqual(firstExtended.hashValue, secondExtended.hashValue)
         assertEqual(first.hashValue, second.hashValue)
     }
-
-    static var allTests = [
-        ("testNilHashValue", testNilHashValue),
-        ("testIntHashValue", testIntHashValue),
-        ("testUIntHashValue", testUIntHashValue),
-        ("testBoolHashValue", testBoolHashValue),
-        ("testFloatHashValue", testFloatHashValue),
-        ("testDoubleHashValue", testDoubleHashValue),
-        ("testStringHashValue", testStringHashValue),
-        ("testBinaryHashValue", testBinaryHashValue),
-        ("testArrayHashValue", testArrayHashValue),
-        ("testMapHashValue", testMapHashValue),
-        ("testExtendedHashValue", testExtendedHashValue),
-    ]
 }

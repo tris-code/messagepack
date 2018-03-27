@@ -42,12 +42,4 @@ class InvalidHeaderTests: TestCase {
         var reader = MessagePackReader(InputByteStream(header))
         assertThrowsError(try reader.readExtendedHeader(code: reader.readCode()))
     }
-
-    static var allTests = [
-        ("testStringHeader", testStringHeader),
-        ("testArrayHeader", testArrayHeader),
-        ("testMapHeader", testMapHeader),
-        ("testBinaryHeader", testBinaryHeader),
-        ("testExtendedHeader", testExtendedHeader),
-    ]
 }

@@ -67,15 +67,4 @@ class StringTests: TestCase {
         let decoded = try? MessagePack.decode(bytes: encoded)
         assertEqual(decoded, expected)
     }
-
-    static var allTests = [
-        ("testEncodeFixStr", testEncodeFixStr),
-        ("testDecodeFixStr", testDecodeFixStr),
-        ("testEncodeStr8", testEncodeStr8),
-        ("testDecodeStr8", testDecodeStr8),
-        ("testEncodeStr16", testEncodeStr16),
-        ("testDecodeStr16", testDecodeStr16),
-        ("testEncodeStr32", testEncodeStr32),
-        ("testDecodeStr32", testDecodeStr32),
-    ]
 }

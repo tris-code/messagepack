@@ -108,17 +108,4 @@ class DecodeTests: TestCase {
         let decoded = try! reader.decode(MessagePack.Extended.self)
         assertEqual(decoded, expected)
     }
-
-    static var allTests = [
-        ("testBool", testBool),
-        ("testFloat", testFloat),
-        ("testDouble", testDouble),
-        ("testString", testString),
-        ("testInt", testInt),
-        ("testUInt", testUInt),
-        ("testBinary", testBinary),
-        ("testArray", testArray),
-        ("testMap", testMap),
-        ("testExtended", testExtended)
-    ]
 }

@@ -89,18 +89,4 @@ class ConvenienceInitializersTests: TestCase {
         let value = MessagePack(extended)
         assertEqual(value, expected)
     }
-
-    static var allTests = [
-        ("testNil", testNil),
-        ("testBool", testBool),
-        ("testFloat", testFloat),
-        ("testDouble", testDouble),
-        ("testString", testString),
-        ("testInt", testInt),
-        ("testUInt", testUInt),
-        ("testArray", testArray),
-        ("testMap", testMap),
-        ("testBinary", testBinary),
-        ("testExtended", testExtended)
-    ]
 }

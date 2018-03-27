@@ -81,18 +81,4 @@ class DescriptionTests: TestCase {
         let description = MessagePack.extended(ext).description
         assertEqual(description, expected)
     }
-
-    static var allTests = [
-        ("testNilDescription", testNilDescription),
-        ("testBoolDescription", testBoolDescription),
-        ("testFloatDescription", testFloatDescription),
-        ("testDoubleDescription", testDoubleDescription),
-        ("testStringDescription", testStringDescription),
-        ("testIntDescription", testIntDescription),
-        ("testUIntDescription", testUIntDescription),
-        ("testArrayDescription", testArrayDescription),
-        ("testMapDescription", testMapDescription),
-        ("testBinaryDescription", testBinaryDescription),
-        ("testExtendedDescription", testExtendedDescription),
-    ]
 }

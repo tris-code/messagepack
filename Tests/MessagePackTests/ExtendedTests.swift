@@ -123,23 +123,4 @@ class ExtendedTests: TestCase {
         let decoded = try? MessagePack.decode(bytes: [0xc9, 0x00, 0x01, 0x00, 0x00, 0x01] + raw)
         assertEqual(decoded, expected)
     }
-
-    static var allTests = [
-        ("testEncodeFixExt1", testEncodeFixExt1),
-        ("testDecodeFixExt1", testDecodeFixExt1),
-        ("testEncodeFixExt2", testEncodeFixExt2),
-        ("testDecodeFixExt2", testDecodeFixExt2),
-        ("testEncodeFixExt4", testEncodeFixExt4),
-        ("testDecodeFixExt4", testDecodeFixExt4),
-        ("testEncodeFixExt8", testEncodeFixExt8),
-        ("testDecodeFixExt8", testDecodeFixExt8),
-        ("testEncodeFixExt16", testEncodeFixExt16),
-        ("testDecodeFixExt16", testDecodeFixExt16),
-        ("testEncodeExt8", testEncodeExt8),
-        ("testDecodeExt8", testDecodeExt8),
-        ("testEncodeExt16", testEncodeExt16),
-        ("testDecodeExt16", testDecodeExt16),
-        ("testEncodeExt32", testEncodeExt32),
-        ("testDecodeExt32", testDecodeExt32),
-    ]
 }

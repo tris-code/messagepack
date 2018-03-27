@@ -37,11 +37,4 @@ class FloatTests: TestCase {
         let decoded = try? MessagePack.decode(bytes: encoded)
         assertEqual(decoded, expected)
     }
-
-    static var allTests = [
-        ("testEncodeFloat", testEncodeFloat),
-        ("testDecodeFloat", testDecodeFloat),
-        ("testEncodeDouble", testEncodeDouble),
-        ("testDecodeDouble", testDecodeDouble)
-    ]
 }

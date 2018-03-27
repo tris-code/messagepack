@@ -143,11 +143,4 @@ class KeyedDecodingContainerTests: TestCase {
             fail(String(describing: error))
         }
     }
-
-
-    static var allTests = [
-        ("testKeyedContainer", testKeyedContainer),
-        ("testNestedKeyedContainer", testNestedKeyedContainer),
-        ("testNestedUnkeyedContainer", testNestedUnkeyedContainer),
-    ]
 }

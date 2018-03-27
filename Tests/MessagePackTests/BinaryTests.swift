@@ -69,14 +69,4 @@ class BinaryTests: TestCase {
             assertEqual(binary, [])
         }
     }
-
-    static var allTests = [
-        ("testEncodeBin8", testEncodeBin8),
-        ("testDecodeBin8", testDecodeBin8),
-        ("testEncodeBin16", testEncodeBin16),
-        ("testDecodeBin16", testDecodeBin16),
-        ("testEncodeBin32", testEncodeBin32),
-        ("testDecodeBin32", testDecodeBin32),
-        ("testEmptyBinary", testEmptyBinary),
-    ]
 }

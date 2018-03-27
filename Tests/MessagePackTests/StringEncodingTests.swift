@@ -50,12 +50,4 @@ class StringEncodingTests: TestCase {
         let decoded = try! MessagePack.decode(bytes: bytes)
         assertEqual(decoded, string)
     }
-
-    static var allTests = [
-        ("testEnglishString", testEnglishString),
-        ("testSwedishString", testSwedishString),
-        ("testJapaneseString", testJapaneseString),
-        ("testRussianString", testRussianString),
-        ("testASCIIString", testASCIIString),
-    ]
 }

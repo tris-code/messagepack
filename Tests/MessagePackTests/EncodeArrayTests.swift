@@ -122,18 +122,4 @@ class EncodeArrayTests: TestCase {
 
         assertEqual(writer.stream.bytes, expected)
     }
-
-    static var allTests = [
-        ("testEncodeBoolArray", testEncodeBoolArray),
-        ("testEncodeUIntArray", testEncodeUIntArray),
-        ("testEncodeUInt8Array", testEncodeUInt8Array),
-        ("testEncodeUInt16Array", testEncodeUInt16Array),
-        ("testEncodeUInt32Array", testEncodeUInt32Array),
-        ("testEncodeUInt64Array", testEncodeUInt64Array),
-        ("testEncodeIntArray", testEncodeIntArray),
-        ("testEncodeInt8Array", testEncodeInt8Array),
-        ("testEncodeInt16Array", testEncodeInt16Array),
-        ("testEncodeInt32Array", testEncodeInt32Array),
-        ("testEncodeInt64Array", testEncodeInt64Array),
-    ]
 }

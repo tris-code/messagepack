@@ -35,11 +35,4 @@ class BoolTests: TestCase {
         let decoded = try? MessagePack.decode(bytes: [0xc3])
         assertEqual(decoded, expected)
     }
-
-    static var allTests = [
-        ("testEncodeBoolFalse", testEncodeBoolFalse),
-        ("testDecodeBoolFalse", testDecodeBoolFalse),
-        ("testEncodeBoolTrue", testEncodeBoolTrue),
-        ("testDecodeBoolTrue", testDecodeBoolTrue)
-    ]
 }

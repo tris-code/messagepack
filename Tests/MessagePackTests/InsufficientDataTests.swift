@@ -151,15 +151,4 @@ class InsufficientDataTests: TestCase {
             }
         }
     }
-
-    static var allTests = [
-        ("testInvalidData", testInvalidData),
-        ("testIntegerInsufficientData", testIntegerInsufficientData),
-        ("testFloatInsufficientData", testFloatInsufficientData),
-        ("testStringInsufficientData", testStringInsufficientData),
-        ("testArrayInsufficientData", testArrayInsufficientData),
-        ("testMapInsufficientData", testMapInsufficientData),
-        ("testBinaryInsufficientData", testBinaryInsufficientData),
-        ("testExtendedInsufficientData", testExtendedInsufficientData),
-    ]
 }

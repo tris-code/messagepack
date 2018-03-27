@@ -23,9 +23,5 @@ class InitTests: TestCase {
         }
         assertEqual(decoded, expected)
     }
-
-    static var allTests = [
-        ("testByteStream", testByteStream),
-    ]
 }
 

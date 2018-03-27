@@ -141,21 +141,4 @@ class IntegerTests: TestCase {
             return
         }
     }
-
-    static var allTests = [
-        ("testEncodeNegativeIntToFixInt", testEncodeNegativeIntToFixInt),
-        ("testEncodePositiveIntToFixInt", testEncodePositiveIntToFixInt),
-        ("testEncodeInt", testEncodeInt),
-        ("testEncodeUInt", testEncodeUInt),
-        ("testDecodeNegativeFixInt", testDecodeNegativeFixInt),
-        ("testDecodePositiveFixInt", testDecodePositiveFixInt),
-        ("testDecodeNegativeInt8", testDecodeNegativeInt8),
-        ("testDecodeNegativeInt16", testDecodeNegativeInt16),
-        ("testDecodeNegativeInt32", testDecodeNegativeInt32),
-        ("testDecodeNegativeInt64", testDecodeNegativeInt64),
-        ("testDecodeUInt8", testDecodeUInt8),
-        ("testDecodeUInt16", testDecodeUInt16),
-        ("testDecodeUInt32", testDecodeUInt32),
-        ("testDecodeUInt64", testDecodeUInt64),
-    ]
 }

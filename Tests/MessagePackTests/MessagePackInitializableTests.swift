@@ -50,13 +50,4 @@ class MessagePackInitializableTests: TestCase {
         assertEqual(packed.arrayValue?[1], "two")
         assertEqual(packed.arrayValue?[2], "three")
     }
-
-    static var allTests = [
-        ("testArray", testArray),
-        ("testDictionary", testDictionary),
-        ("testBinary", testBinary),
-        ("testExtended", testExtended),
-        ("testArrayOfInt", testArrayOfInt),
-        ("testArrayOfString", testArrayOfString)
-    ]
 }

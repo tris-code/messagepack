@@ -73,12 +73,4 @@ class ManualHeadersTests: TestCase {
         }
         assertEqual(result, expected)
     }
-
-
-    static var allTests = [
-        ("testEncodeArray", testEncodeArray),
-        ("testDecodeArray", testDecodeArray),
-        ("testEncodeMap", testEncodeMap),
-        ("testDecodeMap", testDecodeMap)
-    ]
 }

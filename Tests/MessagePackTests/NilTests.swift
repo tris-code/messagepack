@@ -36,10 +36,4 @@ class NilTests: TestCase {
         assertTrue(MessagePack.binary([]).hasValue)
         assertTrue(MessagePack.extended(MessagePack.Extended(type: 0, data: [])).hasValue)
     }
-
-    static var allTests = [
-        ("testEncodeNil", testEncodeNil),
-        ("testDecodeNil", testDecodeNil),
-        ("testHasValue", testHasValue),
-    ]
 }

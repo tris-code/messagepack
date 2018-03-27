@@ -84,18 +84,4 @@ class AccessorsTests: TestCase {
         assertTrue(encoded.isExtended)
         assertEqual(encoded.extendedValue, expected)
     }
-
-    static var allTests = [
-        ("testBool", testBool),
-        ("testFloat", testFloat),
-        ("testDouble", testDouble),
-        ("testString", testString),
-        ("testInt", testInt),
-        ("testUInt", testUInt),
-        ("testConversions", testConversions),
-        ("testArray", testArray),
-        ("testDictionary", testDictionary),
-        ("testBinary", testBinary),
-        ("testExtended", testExtended),
-    ]
 }

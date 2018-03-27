@@ -60,14 +60,4 @@ class LiteralConvertibleTests: TestCase {
         let value: MessagePack = ["Hello": "World"]
         assertEqual(value, expected)
     }
-
-    static var allTests = [
-        ("testNilLiteralConvertible", testNilLiteralConvertible),
-        ("testBooleanLiteralConvertible", testBooleanLiteralConvertible),
-        ("testIntegerLiteralConvertible", testIntegerLiteralConvertible),
-        ("testFloatLiteralConvertible", testFloatLiteralConvertible),
-        ("testStringLiteralConvertible", testStringLiteralConvertible),
-        ("testArrayLiteralConvertible", testArrayLiteralConvertible),
-        ("testDictionaryLiteralConvertible", testDictionaryLiteralConvertible)
-    ]
 }

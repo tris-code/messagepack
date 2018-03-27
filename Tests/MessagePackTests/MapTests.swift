@@ -100,15 +100,4 @@ class MapTests: TestCase {
         let bytes = try? MessagePack.encode(.map(items))
         assertEqual(bytes?.count, 31)
     }
-
-    static var allTests = [
-        ("testEncodeFixMap", testEncodeFixMap),
-        ("testDecodeFixMap", testDecodeFixMap),
-        ("testEncodeMap16", testEncodeMap16),
-        ("testDecodeMap16", testDecodeMap16),
-        ("testEncodeMap32", testEncodeMap32),
-        ("testDecodeMap32", testDecodeMap32),
-        ("testEmptyMap", testEmptyMap),
-        ("testFixMapSize", testFixMapSize)
-    ]
 }
