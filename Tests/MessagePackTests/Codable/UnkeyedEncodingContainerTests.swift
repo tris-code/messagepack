@@ -34,7 +34,7 @@ class UnkeyedEncodingContainerTests: TestCase {
         ])
 
         do {
-            let encoder = _MessagePackEncoder()
+            let encoder = MessagePackEncoder()
             var container = encoder.unkeyedContainer()
 
             try container.encodeNil()
@@ -75,7 +75,7 @@ class UnkeyedEncodingContainerTests: TestCase {
                 case nested
             }
 
-            let encoder = _MessagePackEncoder()
+            let encoder = MessagePackEncoder()
             var container = encoder.unkeyedContainer()
             try container.encode(1)
 
@@ -98,7 +98,7 @@ class UnkeyedEncodingContainerTests: TestCase {
         ])
 
         do {
-            let encoder = _MessagePackEncoder()
+            let encoder = MessagePackEncoder()
             var container = encoder.unkeyedContainer()
             try container.encode(1)
 

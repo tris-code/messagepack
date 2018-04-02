@@ -26,8 +26,9 @@ class MessagePackCodersTests: TestCase {
 
         do {
             let model = Model(int: 42, string: "hello", array: [1,2])
-            let encoded = try MessagePackEncoder().encode(model)
-            assertEqual(encoded, expected)
+            let encoder = MessagePackEncoder()
+            try model.encode(to: encoder)
+            assertEqual(encoder.value, expected)
         } catch {
             fail(String(describing: error))
         }
@@ -46,8 +47,8 @@ class MessagePackCodersTests: TestCase {
         ])
 
         do {
-            let decoded = try MessagePackDecoder()
-                .decode(Model.self, from: encoded)
+            let decoder = MessagePackDecoder(encoded)
+            let decoded = try Model(from: decoder)
             assertEqual(decoded.int, 42)
             assertEqual(decoded.string, "hello")
             assertEqual(decoded.array, [1,2])

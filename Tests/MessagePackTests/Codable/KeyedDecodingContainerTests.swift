@@ -53,7 +53,7 @@ class KeyedDecodingContainerTests: TestCase {
         }
 
         do {
-            let decoder = _MessagePackDecoder(encoded)
+            let decoder = MessagePackDecoder(encoded)
             let container = try decoder.container(keyedBy: Keys.self)
 
             assertEqual(try container.decodeNil(forKey: .nil), true)
@@ -98,7 +98,7 @@ class KeyedDecodingContainerTests: TestCase {
                 case two
             }
 
-            let decoder = _MessagePackDecoder(encoded)
+            let decoder = MessagePackDecoder(encoded)
             let container = try decoder.container(keyedBy: One.self)
             assertEqual(try container.decode(Int.self, forKey: .one), 1)
 
@@ -131,7 +131,7 @@ class KeyedDecodingContainerTests: TestCase {
                 case two
             }
 
-            let decoder = _MessagePackDecoder(encoded)
+            let decoder = MessagePackDecoder(encoded)
             let container = try decoder.container(keyedBy: One.self)
             assertEqual(try container.decode(Int.self, forKey: .one), 1)
 
