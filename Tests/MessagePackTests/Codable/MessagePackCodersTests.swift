@@ -24,13 +24,11 @@ class MessagePackCodersTests: TestCase {
             .string("array"): .array([.int(1), .int(2)])
         ])
 
-        do {
+        scope {
             let model = Model(int: 42, string: "hello", array: [1,2])
             let encoder = MessagePackEncoder()
             try model.encode(to: encoder)
             assertEqual(encoder.value, expected)
-        } catch {
-            fail(String(describing: error))
         }
     }
 
@@ -46,14 +44,12 @@ class MessagePackCodersTests: TestCase {
             .string("array"): .array([.int(1), .int(2)])
         ])
 
-        do {
+        scope {
             let decoder = MessagePackDecoder(encoded)
             let decoded = try Model(from: decoder)
             assertEqual(decoded.int, 42)
             assertEqual(decoded.string, "hello")
             assertEqual(decoded.array, [1,2])
-        } catch {
-            fail(String(describing: error))
         }
     }
 }

@@ -52,7 +52,7 @@ class KeyedEncodingContainerTests: TestCase {
             }
         }
 
-        do {
+        scope {
             let encoder = MessagePackEncoder()
             var container = encoder.container(keyedBy: Keys.self)
 
@@ -75,8 +75,6 @@ class KeyedEncodingContainerTests: TestCase {
             try container.encode([1 : 2], forKey: .map)
 
             assertEqual(encoder.value, expected)
-        } catch {
-            fail(String(describing: error))
         }
     }
 
@@ -89,7 +87,7 @@ class KeyedEncodingContainerTests: TestCase {
             .string("three"): .int(3)
         ])
 
-        do {
+        scope {
             enum One: CodingKey {
                 case one
                 case nested
@@ -111,8 +109,6 @@ class KeyedEncodingContainerTests: TestCase {
             try container.encode(3, forKey: .three)
 
             assertEqual(encoder.value, expected)
-        } catch {
-            fail(String(describing: error))
         }
     }
 
@@ -123,7 +119,7 @@ class KeyedEncodingContainerTests: TestCase {
             .string("three"): .int(3)
         ])
 
-        do {
+        scope {
             enum One: CodingKey {
                 case one
                 case nested
@@ -144,8 +140,6 @@ class KeyedEncodingContainerTests: TestCase {
             try container.encode(3, forKey: .three)
 
             assertEqual(encoder.value, expected)
-        } catch {
-            fail(String(describing: error))
         }
     }
 }

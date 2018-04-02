@@ -33,7 +33,7 @@ class UnkeyedDecodingContainerTests: TestCase {
             MessagePack.map([.int(1): .int(2)])
         ])
 
-        do {
+        scope {
             let decoder = MessagePackDecoder(encoded)
             var container = try decoder.unkeyedContainer()
 
@@ -54,8 +54,6 @@ class UnkeyedDecodingContainerTests: TestCase {
             assertEqual(try container.decode(String.self), "hello")
             assertEqual(try container.decode([Int].self), [1, 2])
             assertEqual(try container.decode([Int : Int].self), [1 : 2])
-        } catch {
-            fail(String(describing: error))
         }
     }
 
@@ -68,7 +66,7 @@ class UnkeyedDecodingContainerTests: TestCase {
             .int(3)
         ])
 
-        do {
+        scope {
             enum One: CodingKey {
                 case nested
             }
@@ -81,8 +79,6 @@ class UnkeyedDecodingContainerTests: TestCase {
             assertEqual(try nested.decode(Int.self, forKey: .nested), 2)
 
             assertEqual(try container.decode(Int.self), 3)
-        } catch {
-            fail(String(describing: error))
         }
     }
 
@@ -93,7 +89,7 @@ class UnkeyedDecodingContainerTests: TestCase {
             .int(3)
         ])
 
-        do {
+        scope {
             let decoder = MessagePackDecoder(encoded)
             var container = try decoder.unkeyedContainer()
             assertEqual(try container.decode(Int.self), 1)
@@ -102,8 +98,6 @@ class UnkeyedDecodingContainerTests: TestCase {
             assertEqual(try nested.decode(Int.self), 2)
 
             assertEqual(try container.decode(Int.self), 3)
-        } catch {
-            fail(String(describing: error))
         }
     }
 }

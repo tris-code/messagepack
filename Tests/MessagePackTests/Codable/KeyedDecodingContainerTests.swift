@@ -52,7 +52,7 @@ class KeyedDecodingContainerTests: TestCase {
             }
         }
 
-        do {
+        scope {
             let decoder = MessagePackDecoder(encoded)
             let container = try decoder.container(keyedBy: Keys.self)
 
@@ -69,12 +69,14 @@ class KeyedDecodingContainerTests: TestCase {
             assertEqual(try container.decode(UInt64.self, forKey: .uint64), 5)
             assertEqual(try container.decode(Bool.self, forKey: .bool), true)
             assertEqual(try container.decode(Float.self, forKey: .float), 3.14)
-            assertEqual(try container.decode(Double.self, forKey: .double), 3.14)
-            assertEqual(try container.decode(String.self, forKey: .string), "hello")
-            assertEqual(try container.decode([Int].self, forKey: .array), [1, 2])
-            assertEqual(try container.decode([Int : Int].self, forKey: .map), [1 : 2])
-        } catch {
-            fail(String(describing: error))
+            assertEqual(
+                try container.decode(Double.self, forKey: .double), 3.14)
+            assertEqual(
+                try container.decode(String.self, forKey: .string), "hello")
+            assertEqual(
+                try container.decode([Int].self, forKey: .array), [1, 2])
+            assertEqual(
+                try container.decode([Int : Int].self, forKey: .map), [1 : 2])
         }
     }
 
@@ -87,7 +89,7 @@ class KeyedDecodingContainerTests: TestCase {
             .string("three"): .int(3)
         ])
 
-        do {
+        scope {
             enum One: CodingKey {
                 case one
                 case nested
@@ -108,8 +110,6 @@ class KeyedDecodingContainerTests: TestCase {
 
             assertEqual(try container.decode(Int.self, forKey: .three), 3)
 
-        } catch {
-            fail(String(describing: error))
         }
     }
 
@@ -120,7 +120,7 @@ class KeyedDecodingContainerTests: TestCase {
             .string("three"): .int(3)
         ])
 
-        do {
+        scope {
             enum One: CodingKey {
                 case one
                 case nested
@@ -139,8 +139,6 @@ class KeyedDecodingContainerTests: TestCase {
             assertEqual(try nested.decode(Int.self), 2)
 
             assertEqual(try container.decode(Int.self, forKey: .three), 3)
-        } catch {
-            fail(String(describing: error))
         }
     }
 }
