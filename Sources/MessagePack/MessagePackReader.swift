@@ -10,12 +10,12 @@
 
 import Stream
 
-public struct MessagePackReader<T: StreamReader> {
-    var stream: T
+public struct MessagePackReader {
+    var stream: StreamReader
 
     typealias Error = MessagePack.Error
 
-    public init(_ stream: T) {
+    public init(_ stream: StreamReader) {
         self.stream = stream
     }
 
