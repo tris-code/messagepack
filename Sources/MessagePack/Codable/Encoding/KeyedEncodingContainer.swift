@@ -33,11 +33,11 @@ final class MessagePackKeyedEncodingContainer<K : CodingKey>
         return []
     }
 
-    let encoder: _MessagePackEncoder
+    let encoder: MessagePackEncoder
     let container: TypeErasedMessagePackKeyedEncodingContainer
 
     init(
-        encoder: _MessagePackEncoder,
+        encoder: MessagePackEncoder,
         container: TypeErasedMessagePackKeyedEncodingContainer
     ) {
         self.encoder = encoder
@@ -107,7 +107,7 @@ final class MessagePackKeyedEncodingContainer<K : CodingKey>
     func encode<T>(
         _ value: T, forKey key: K
     ) throws where T : Encodable {
-        let encoder = _MessagePackEncoder()
+        let encoder = MessagePackEncoder()
         try value.encode(to: encoder)
         container.values[key.messagePackKey] = .value(encoder.value)
     }
@@ -137,7 +137,7 @@ final class MessagePackKeyedEncodingContainer<K : CodingKey>
 
     func superEncoder(forKey key: K) -> Encoder {
         // NOTE: actually works as nested container
-        let encoder = _MessagePackEncoder()
+        let encoder = MessagePackEncoder()
         container.values[key.messagePackKey] = .container(encoder)
         return encoder
     }

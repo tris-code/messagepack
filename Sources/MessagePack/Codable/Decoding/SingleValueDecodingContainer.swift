@@ -94,7 +94,7 @@ struct MessagePackSingleValueDecodingContainer: SingleValueDecodingContainer {
     }
 
     func decode<T>(_ type: T.Type) throws -> T where T : Decodable {
-        let decoder = _MessagePackDecoder(value)
+        let decoder = MessagePackDecoder(value)
         return try T(from: decoder)
     }
 }

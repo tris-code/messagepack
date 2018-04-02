@@ -8,23 +8,8 @@
  * See CONTRIBUTORS.txt for the list of the project authors
  */
 
-public struct MessagePackEncoder {
-    public init() {}
 
-    public func encode<T: Encodable>(_ value: T) throws -> MessagePack {
-        let encoder = _MessagePackEncoder()
-        try value.encode(to: encoder)
-        return encoder.value
-    }
-
-    public func encode(_ value: Encodable) throws -> MessagePack {
-        let encoder = _MessagePackEncoder()
-        try value.encode(to: encoder)
-        return encoder.value
-    }
-}
-
-final class _MessagePackEncoder: Encoder, MessagePackContainer {
+public final class MessagePackEncoder: Encoder, MessagePackContainer {
     public var codingPath: [CodingKey] {
         return []
     }
@@ -40,7 +25,7 @@ final class _MessagePackEncoder: Encoder, MessagePackContainer {
 
     var container: ContainerType?
 
-    var value: MessagePack {
+    public var value: MessagePack {
         guard let container = container else {
             return .nil
         }

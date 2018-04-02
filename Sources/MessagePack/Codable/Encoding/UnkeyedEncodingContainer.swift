@@ -24,7 +24,7 @@ final class MessagePackUnkeyedEncodingContainer
         return []
     }
 
-    let encoder: _MessagePackEncoder
+    let encoder: MessagePackEncoder
 
     var values: [MessagePackContainerType]
 
@@ -43,7 +43,7 @@ final class MessagePackUnkeyedEncodingContainer
         return values.count
     }
 
-    init(_ encoder: _MessagePackEncoder) {
+    init(_ encoder: MessagePackEncoder) {
         self.encoder = encoder
         self.values = []
     }
@@ -105,7 +105,7 @@ final class MessagePackUnkeyedEncodingContainer
     }
 
     func encode<T>(_ value: T) throws where T : Encodable {
-        let encoder = _MessagePackEncoder()
+        let encoder = MessagePackEncoder()
         try value.encode(to: encoder)
         values.append(encoder.value)
     }
