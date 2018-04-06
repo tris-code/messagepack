@@ -22,7 +22,10 @@ extension MessagePack: ExpressibleByBooleanLiteral {
 
 extension MessagePack: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: Int) {
-        self = .int(value)
+        switch value {
+        case 0...: self = .uint(UInt(value))
+        default: self = .int(value)
+        }
     }
 }
 
