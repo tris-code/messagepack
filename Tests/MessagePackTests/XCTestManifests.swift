@@ -160,22 +160,6 @@ extension FloatTests {
     ]
 }
 
-extension HashValueTests {
-    static let __allTests = [
-        ("testArrayHashValue", testArrayHashValue),
-        ("testBinaryHashValue", testBinaryHashValue),
-        ("testBoolHashValue", testBoolHashValue),
-        ("testDoubleHashValue", testDoubleHashValue),
-        ("testExtendedHashValue", testExtendedHashValue),
-        ("testFloatHashValue", testFloatHashValue),
-        ("testIntHashValue", testIntHashValue),
-        ("testMapHashValue", testMapHashValue),
-        ("testNilHashValue", testNilHashValue),
-        ("testStringHashValue", testStringHashValue),
-        ("testUIntHashValue", testUIntHashValue),
-    ]
-}
-
 extension InitTests {
     static let __allTests = [
         ("testByteStream", testByteStream),
@@ -246,9 +230,10 @@ extension LiteralConvertibleTests {
         ("testBooleanLiteralConvertible", testBooleanLiteralConvertible),
         ("testDictionaryLiteralConvertible", testDictionaryLiteralConvertible),
         ("testFloatLiteralConvertible", testFloatLiteralConvertible),
-        ("testIntegerLiteralConvertible", testIntegerLiteralConvertible),
         ("testNilLiteralConvertible", testNilLiteralConvertible),
+        ("testSignedIntegerLiteralConvertible", testSignedIntegerLiteralConvertible),
         ("testStringLiteralConvertible", testStringLiteralConvertible),
+        ("testUnsignedIntegerLiteralConvertible", testUnsignedIntegerLiteralConvertible),
     ]
 }
 
@@ -364,7 +349,6 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(EqualityTests.__allTests),
         testCase(ExtendedTests.__allTests),
         testCase(FloatTests.__allTests),
-        testCase(HashValueTests.__allTests),
         testCase(InitTests.__allTests),
         testCase(InsufficientDataTests.__allTests),
         testCase(IntegerTests.__allTests),
