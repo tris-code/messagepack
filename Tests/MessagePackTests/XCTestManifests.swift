@@ -1,3 +1,4 @@
+#if !os(macOS)
 import XCTest
 
 extension AccessorsTests {
@@ -335,7 +336,6 @@ extension UnkeyedEncodingContainerTests {
     ]
 }
 
-#if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(AccessorsTests.__allTests),
