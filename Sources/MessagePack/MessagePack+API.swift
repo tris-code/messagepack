@@ -27,7 +27,7 @@ extension MessagePack {
         _ value: Model,
         to stream: StreamWriter) throws
     {
-        let encoder = MessagePackEncoder()
+        let encoder = Encoder()
         try value.encode(to: encoder)
         try MessagePack.encode(encoder.value, to: stream)
     }
@@ -49,7 +49,7 @@ extension MessagePack {
         encodable value: Encodable,
         to stream: StreamWriter) throws
     {
-        let encoder = MessagePackEncoder()
+        let encoder = Encoder()
         try value.encode(to: encoder)
         try MessagePack.encode(encoder.value, to: stream)
     }

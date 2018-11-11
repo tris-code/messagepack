@@ -35,7 +35,7 @@ class UnkeyedEncodingContainerTests: TestCase {
         ])
 
         scope {
-            let encoder = MessagePackEncoder()
+            let encoder = Encoder()
             var container = encoder.unkeyedContainer()
 
             try container.encodeNil()
@@ -74,7 +74,7 @@ class UnkeyedEncodingContainerTests: TestCase {
                 case nested
             }
 
-            let encoder = MessagePackEncoder()
+            let encoder = Encoder()
             var container = encoder.unkeyedContainer()
             try container.encode(1)
 
@@ -95,7 +95,7 @@ class UnkeyedEncodingContainerTests: TestCase {
         ])
 
         scope {
-            let encoder = MessagePackEncoder()
+            let encoder = Encoder()
             var container = encoder.unkeyedContainer()
             try container.encode(1)
 
