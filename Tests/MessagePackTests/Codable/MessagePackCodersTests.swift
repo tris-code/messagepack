@@ -46,7 +46,7 @@ class MessagePackCodersTests: TestCase {
         ])
 
         scope {
-            let decoder = MessagePackDecoder(encoded)
+            let decoder = Decoder(encoded)
             let decoded = try Model(from: decoder)
             assertEqual(decoded.int, 42)
             assertEqual(decoded.string, "hello")
