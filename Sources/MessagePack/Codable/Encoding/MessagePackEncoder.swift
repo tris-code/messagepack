@@ -9,6 +9,7 @@
  *                                                                            *
  ******************************************************************************/
 
+import Codable
 
 public final class MessagePackEncoder: Encoder, MessagePackContainer {
     public var codingPath: [CodingKey] {
@@ -19,6 +20,11 @@ public final class MessagePackEncoder: Encoder, MessagePackContainer {
     }
 
     public init() {}
+
+    public enum Error: Swift.Error {
+        case containerTypeMismatch
+        case invalidSuperContainerForSingleValue
+    }
 
     enum ContainerType {
         case keyed(MessagePackContainer)
@@ -45,7 +51,7 @@ public final class MessagePackEncoder: Encoder, MessagePackContainer {
         let typeErasedContainer: TypeErasedMessagePackKeyedEncodingContainer
         if let container = self.container {
             guard case .keyed(let container) = container else {
-                fatalError("super encoder must use the same container type")
+                return KeyedEncodingContainer(KeyedEncodingError(Error.containerTypeMismatch))
             }
             typeErasedContainer = container as! TypeErasedMessagePackKeyedEncodingContainer
         } else {
@@ -60,7 +66,7 @@ public final class MessagePackEncoder: Encoder, MessagePackContainer {
     public func unkeyedContainer() -> UnkeyedEncodingContainer {
         if let container = self.container {
             guard case .unkeyed(let container) = container else {
-                fatalError("super encoder must use the same container type")
+                return EncodingError(Error.containerTypeMismatch)
             }
             return container as! UnkeyedEncodingContainer
         }
@@ -72,13 +78,24 @@ public final class MessagePackEncoder: Encoder, MessagePackContainer {
     public func singleValueContainer() -> SingleValueEncodingContainer {
         if let container = self.container {
             guard case .unkeyed(let container) = container else {
-                fatalError("single value container can be called through" +
-                    "super encoder only from unkeyed container")
+                return EncodingError(Error.invalidSuperContainerForSingleValue)
             }
             return container as! SingleValueEncodingContainer
         }
         let container = MessagePackSingleValueEncodingContainer()
         self.container = .singleValue(container)
         return container
+    }
+}
+
+extension MessagePackEncoder.Error: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .containerTypeMismatch:
+            return "super encoder must use the same container type"
+        case .invalidSuperContainerForSingleValue:
+            return "single value container can be called through" +
+                    "super encoder only from unkeyed container"
+        }        
     }
 }
