@@ -25,14 +25,18 @@ let package = Package(
             url: "https://github.com/tris-foundation/stream.git",
             .branch("master")),
         .package(
+            url: "https://github.com/tris-foundation/hex.git",
+            .branch("master")),
+        .package(
             url: "https://github.com/tris-foundation/test.git",
             .branch("master"))
     ],
     targets: [
-        .target(name: "MessagePack", dependencies: ["Codable", "Stream"]),
+        .target(
+            name: "MessagePack",
+            dependencies: ["Codable", "Stream", "Hex"]),
         .testTarget(
             name: "MessagePackTests",
-            dependencies: ["MessagePack", "Test"]
-        )
+            dependencies: ["MessagePack", "Test"])
     ]
 )
