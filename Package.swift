@@ -25,7 +25,7 @@ let package = Package(
             url: "https://github.com/tris-foundation/stream.git",
             .branch("master")),
         .package(
-            url: "https://github.com/tris-foundation/hex.git",
+            url: "https://github.com/tris-foundation/radix.git",
             .branch("master")),
         .package(
             url: "https://github.com/tris-foundation/test.git",
