@@ -5,7 +5,7 @@
 ## Package.swift
 
 ```swift
-.package(url: "https://github.com/tris-foundation/messagepack.git", .branch("master"))
+.package(url: "https://github.com/tris-code/messagepack.git", .branch("master"))
 ```
 
 ## Memo
@@ -37,7 +37,7 @@ public enum MessagePack {
 
 ## Usage
 
-You can find this code and more in [examples](https://github.com/tris-foundation/examples).
+You can find this code and more in [examples](https://github.com/tris-code/examples).
 
 ### Basic API
 
