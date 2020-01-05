@@ -7,18 +7,10 @@ let package = Package(
         .library(name: "MessagePack", targets: ["MessagePack"])
     ],
     dependencies: [
-        .package(
-            url: "https://github.com/tris-code/codable.git",
-            .branch("master")),
-        .package(
-            url: "https://github.com/tris-code/stream.git",
-            .branch("master")),
-        .package(
-            url: "https://github.com/tris-code/radix.git",
-            .branch("master")),
-        .package(
-            url: "https://github.com/tris-code/test.git",
-            .branch("master"))
+        .package(path: "../Codable"),
+        .package(path: "../Stream"),
+        .package(path: "../Radix"),
+        .package(path: "../Test")
     ],
     targets: [
         .target(
