@@ -7,10 +7,10 @@ let package = Package(
         .library(name: "MessagePack", targets: ["MessagePack"])
     ],
     dependencies: [
-        .package(path: "../Codable"),
-        .package(path: "../Stream"),
-        .package(path: "../Radix"),
-        .package(path: "../Test")
+        .package(path: "../codable"),
+        .package(path: "../stream"),
+        .package(path: "../radix"),
+        .package(path: "../test")
     ],
     targets: [
         .target(
